@@ -14,11 +14,11 @@ db="chinook")
 
 try:
   # run a query
-  with connection.cursor() as cursor:
-    sql = "select * from artist;"
+  with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+    sql = "select * from genre;"
     cursor.execute(sql)
-    result = cursor.fetchall()
-    print(result)
+    for row in cursor:
+      print(row)
 
 finally:
   # close the connection, regardless of whether the above was successful
