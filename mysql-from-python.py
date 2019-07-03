@@ -16,7 +16,7 @@ db="chinook")
 try:
   # run a query
   with connection.cursor() as cursor:
-    rows = cursor.execute("DELETE FROM Friends WHERE name = %s;", "Bob")
+    rows = cursor.executemany("DELETE FROM Friends WHERE name = %s;",[ "Bob", "jim"])
     connection.commit()
     
 finally:
