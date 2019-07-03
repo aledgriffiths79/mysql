@@ -16,7 +16,10 @@ db="chinook")
 try:
   # run a query
   with connection.cursor() as cursor:
-    rows = cursor.executemany("DELETE FROM Friends WHERE name = %s;",[ "Bob", "jim"])
+    list_of_names = ['fred', 'fred']
+    # Prepare a string with the same number of placeholders as in list_of_names
+    format_strings = ",".join(['%s']*len(list_of_names))
+    cursor.execute("delete from Friends where name in ({})".format(format_strings), list_of_names)
     connection.commit()
     
 finally:
